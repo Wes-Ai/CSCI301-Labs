@@ -35,8 +35,8 @@
 
 ;; 5.)
 (define (mystery-tail L)
-  (define (iter L acc) ; Helper function for acc
+  (define (count L acc) ; Helper function for acc
     (if (null? L)
         acc
-        (iter (cdr L) (cons (car L) acc))))
-  (iter L '()))
+        (count (cdr L) (cons (car L) acc))))
+  (count L '()))
