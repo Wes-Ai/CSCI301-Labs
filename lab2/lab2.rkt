@@ -18,24 +18,25 @@
   )
 
 ;; 3.)
-
-(define (retrieve-first-n num lest)
-
+(define (retrieve-first-n n lest)
   (cond
-    [(< num (length(list lest)) 0)]
-    [(= (sgn num) -1) null]
-    [else (append (car(list lest)) (retrieve-first-n (- num 1) (list lest)))]
-    )
-  )
-    
-(retrieve-first-n 3 '(a b c d e f g h i))
+    ((or (negative? n) (null? lest)) '()) ; return empty list if neg
+    ((= n 0) '()) ; return empty list if 0
+    (else (cons (car lest)
+                (retrieve-first-n (- n 1) (cdr lest)))))) 
 
 
-;(sum '())
-;(sum '(4 5 0 1)); ---> 10
-;(sum (gen-list 1 5)); ---> 15
+;; 4.)
+(define (pair-sum? lst val)
+  (cond
+    ((< (length lst) 2) #f) ; If list has >2 elements, false
+    ((= val (+ (first lst) (second lst))) #t)
+    (else (pair-sum? (rest lst) val))))
 
-;(gen-list 5 1)
-;(gen-list 1 5)
-
-
+;; 5.)
+(define (mystery-tail L)
+  (define (iter L acc) ; Helper function for acc
+    (if (null? L)
+        acc
+        (iter (cdr L) (cons (car L) acc))))
+  (iter L '()))
