@@ -34,14 +34,10 @@
 
 (define (intersect s1 s2)
   [cond
-    [(null? s1) s1]
-    [(member? (car s1) s2)
-     (cons ((car s1) (intersect (cdr s1) s2)))]
+    [(null? s1) '()]
+    [(member (car s1) s2)
+     (cons (car s1) (intersect (cdr s1) s2))]
     (else (intersect (cdr s1) s2)
           )
     ]
   )
-
-;(intersect '(1 2 3) '(3 2 1)) ;---> (1 2 3)
-;(intersect '(1 2 3) '(4 5 6)) ;---> ()
-(intersect '(1 2 3) '(2 3 4 5 6)) ;---> (2 3)
